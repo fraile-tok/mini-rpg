@@ -95,7 +95,7 @@ class TextRPG:
         if self.current_choices:
             for i, (choice_text, _) in enumerate(self.current_choices, start=1):
                 self.text_area.insert(tk.END, f"{i}. {choice_text}\n")
-            self.text_area.insert(tk.END, "\nPress number to choose. Press Backspace to go back.")
+            self.text_area.insert(tk.END, "\nPress number to choose.\nPress Backspace to go back.\nPress Return to restart.")
         else:
             self.text_area.insert(tk.END, "\n--- THE END ---\n")
             self.text_area.insert(tk.END, "Press Backspace to return.\n")
@@ -150,7 +150,9 @@ class TextRPG:
         elif key == "BackSpace" and self.history:
             prev_node = self.history.pop()
             self.show_node(prev_node)
-
+        elif key == "Return" and self.history:
+            self.history.clear()
+            self.show_node("start")
 
 # === Start GUI ===
 if __name__ == "__main__":
