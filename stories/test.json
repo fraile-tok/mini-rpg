@@ -1,0 +1,27 @@
+{
+    "start": {
+      "ascii_art": "forest.txt",
+      "text": "$$name, $$class,you find yourself at the edge of an ancient forest.",
+      "choices": {
+        "Enter the forest": "deep_forest",
+        "Walk away": "village"
+      }
+    },
+    "north_path": {
+      "text": "You find a river. It is wide and fast.",
+      "choices": {
+        "Go back": "start",
+        "Try to cross": "river_crossing"
+      }
+    },
+    "east_path": {
+      "text": "You meet a merchant on the road.",
+      "choices": {
+        "Talk to merchant": "merchant_convo",
+        "Ignore and walk on": "forest_deeper"
+      }
+    },
+    "ending": {
+      "text": "You are the last survivor of the great war. You have been given a magical sword to defend yourself."
+    }
+  }
