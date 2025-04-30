@@ -24,11 +24,11 @@ class StartMenu:
         # GUI elements
         tk.Label(root, text="Choose a Story:", fg="lime", bg="black", font=(FONT, 14)).pack()
         self.story_var = tk.StringVar(value=self.story_files[0])
-        tk.OptionMenu(root, self.story_var, *self.story_files).pack(pady=5)
+        tk.OptionMenu(root, self.story_var, *self.story_files).pack(pady=20)
 
         tk.Label(root, text="Choose a Character:", fg="lime", bg="black", font=(FONT, 14)).pack()
         self.char_var = tk.StringVar(value=self.char_files[0])
-        tk.OptionMenu(root, self.char_var, *self.char_files).pack(pady=5)
+        tk.OptionMenu(root, self.char_var, *self.char_files).pack(pady=20)
 
         tk.Button(root, text="Start Game", font=(FONT, 14),
                   command=self.start_game).pack(pady=20)
@@ -48,7 +48,8 @@ class TextRPG:
             self.character = json.load(f)
 
         self.root = root
-        self.root.title("Text RPG")
+        story_title = self.story.get("title", "Untitled")
+        self.root.title(f"{story_title} | Text RPG")
         self.root.configure(bg="black")
 
         for widget in root.winfo_children():
@@ -95,10 +96,10 @@ class TextRPG:
         if self.current_choices:
             for i, (choice_text, _) in enumerate(self.current_choices, start=1):
                 self.text_area.insert(tk.END, f"{i}. {choice_text}\n")
-            self.text_area.insert(tk.END, "\nPress number to choose.\nPress Backspace to go back.\nPress Return to restart.")
+            self.text_area.insert(tk.END, "\nPress number to choose.\nPress Backspace to go back.")
         else:
             self.text_area.insert(tk.END, "\n--- THE END ---\n")
-            self.text_area.insert(tk.END, "Press Backspace to return.\n")
+            self.text_area.insert(tk.END, "\nPress Backspace to return.\nPress Return to restart.")
 
         self.text_area.config(state=tk.DISABLED)
 

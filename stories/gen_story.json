@@ -1,4 +1,5 @@
 {
+    "title": "The Choosing",
     "start": {
       "text": "The sun rises over the sleepy village of Eldenbrook. $$name wakes to the sound of a bell tolling in the distance. Today is the day of the Choosing.",
       "choices": {
