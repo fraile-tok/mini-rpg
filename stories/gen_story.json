@@ -1,0 +1,102 @@
+{
+    "start": {
+      "text": "The sun rises over the sleepy village of Eldenbrook. $$name wakes to the sound of a bell tolling in the distance. Today is the day of the Choosing.",
+      "choices": {
+        "Get dressed and head to the village square": "village_square",
+        "Sneak out into the forest instead": "forest_path"
+      }
+    },
+  
+    "village_square": {
+      "text": "$$name arrives at the bustling square. Villagers gather around the ancient stone where destinies are foretold. The elder beckons.",
+      "choices": {
+        "Approach the elder": "elder_speaks",
+        "Slip away quietly": "quiet_exit"
+      }
+    },
+  
+    "forest_path": {
+      "text": "$$name steps off the road into the shaded woods. The trees whisper with the wind. A faint trail winds deeper into the forest.",
+      "choices": {
+        "Follow the trail": "forest_clearing",
+        "Turn back toward the village": "village_square"
+      }
+    },
+  
+    "elder_speaks": {
+      "text": "The elder places a hand on $$name's shoulder. 'I see a fork in your fate,' he says. 'Light or shadow, the path is yours.'",
+      "choices": {
+        "Ask about the path of light": "path_light",
+        "Ask about the path of shadow": "path_shadow"
+      }
+    },
+  
+    "quiet_exit": {
+      "text": "You step back from the crowd, unnoticed. The road home is quiet, but something nags at you — a chance left unexplored.",
+      "choices": {
+        "Return to the square": "village_square",
+        "Keep walking home": "ending_home"
+      }
+    },
+  
+    "forest_clearing": {
+      "text": "The path opens into a clearing bathed in golden light. A stag stands silently, watching you with deep, intelligent eyes.",
+      "choices": {
+        "Approach the stag": "stag_encounter",
+        "Hide and observe": "watch_stag"
+      }
+    },
+  
+    "path_light": {
+      "text": "The elder smiles faintly. 'The path of light leads to sacrifice and service, but also to joy beyond the veil.'",
+      "choices": {
+        "Accept the path of light": "initiation_light",
+        "Decline and walk away": "quiet_exit"
+      }
+    },
+  
+    "path_shadow": {
+      "text": "The elder’s eyes darken. 'The path of shadow offers power, but it comes at a cost few can bear.'",
+      "choices": {
+        "Accept the path of shadow": "initiation_shadow",
+        "Decline and walk away": "quiet_exit"
+      }
+    },
+  
+    "stag_encounter": {
+      "text": "The stag speaks, not with words but with thoughts. 'You are not bound by the village's fate. Choose your own legend.'",
+      "choices": {
+        "Vow to protect the forest": "ending_guardian",
+        "Return to confront your destiny": "village_square"
+      }
+    },
+  
+    "watch_stag": {
+      "text": "You watch in silence. The stag bows once, then vanishes into mist. A sense of peace washes over you.",
+      "choices": {
+        "Follow where it vanished": "stag_encounter",
+        "Return to the village": "village_square"
+      }
+    },
+  
+    "initiation_light": {
+      "text": "$$name kneels as the elder places the silver cord around your neck. The sky brightens. You are now a Warden of the Light.",
+      "choices": {}
+    },
+  
+    "initiation_shadow": {
+      "text": "Darkness coils around your hand as you accept the elder’s mark. You are now a Walker of the Veil. Power hums in your veins.",
+      "choices": {}
+    },
+  
+    "ending_guardian": {
+      "text": "$$name takes the stag’s blessing. Seasons pass, and you become a guardian of the deep woods, known only in hushed tales.",
+      "choices": {}
+    },
+  
+    "ending_home": {
+      "text": "You live a quiet life, untouched by magic or fate. But sometimes, in dreams, you hear a stag’s call in the distance.",
+      "choices": {}
+    }
+  }
+  

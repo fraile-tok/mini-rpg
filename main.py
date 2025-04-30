@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.font as tkfont
 import json
 import os
 import re
@@ -8,10 +9,6 @@ STORY_DIR = "stories"
 CHARACTER_DIR = "characters"
 ASCII_DIR = "ascii_art"
 FONT = "Fira Code"
-try:
-    tk.font.nametofont(FONT)
-except tk.TclError:
-    FONT = "Courier"
 
 class StartMenu:
     def __init__(self, root, on_start_game):
