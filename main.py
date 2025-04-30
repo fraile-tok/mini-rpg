@@ -47,7 +47,7 @@ class TextRPG:
         self.text_area.config(state=tk.NORMAL)
         self.text_area.delete(1.0, tk.END)
 
-        # 🔳 Display ASCII art (if exists)
+        # Display ASCII art if exists
         if "ascii_art" in node:
             art_path = os.path.join("ascii_art", node["ascii_art"])
             if os.path.exists(art_path):
@@ -55,8 +55,7 @@ class TextRPG:
                     ascii_content = art_file.read()
                     self.text_area.insert(tk.END, ascii_content + "\n\n")
 
-        # Insert text with styled placeholder replacements
-        self.insert_with_highlights(raw_text)
+        self.insert_rich_text(raw_text)
         self.text_area.insert(tk.END, "\n\n")
 
         if self.current_choices:
@@ -69,37 +68,47 @@ class TextRPG:
 
         self.text_area.config(state=tk.DISABLED)
 
-    def replace_placeholders(self, text):
-        def replace_match(match):
-            var_name = match.group(1)
-            return character.get(var_name, f"{{missing:{var_name}}}")
-
-        return re.sub(r"\$\$(\w+)", replace_match, text)
-    
-    def insert_with_highlights(self, text):
-        # Define tag style for substituted variables
+    def insert_rich_text(self, text):
+        # Configure styles
         self.text_area.tag_configure("highlighted", foreground="yellow", font=("Fira Code", 14, "bold italic"))
+        self.text_area.tag_configure("red", foreground="red")
+        self.text_area.tag_configure("blue", foreground="blue")
+        self.text_area.tag_configure("green", foreground="green")
+        self.text_area.tag_configure("gold", foreground="goldenrod")
+        self.text_area.tag_configure("b", font=("Fira Code", 14, "bold"))
+        self.text_area.tag_configure("i", font=("Fira Code", 14, "italic"))
 
-        pos = 0
-        for match in re.finditer(r"\$\$(\w+)", text):
-            start, end = match.span()
-            var_name = match.group(1)
-            value = character.get(var_name, f"{{missing:{var_name}}}")
+        i = 0
+        while i < len(text):
+            # Match $$placeholder
+            if text[i:i+2] == "$$":
+                match = re.match(r"\$\$(\w+)", text[i:])
+                if match:
+                    var_name = match.group(1)
+                    value = character.get(var_name, f"{{missing:{var_name}}}")
+                    start_idx = self.text_area.index(tk.INSERT)
+                    self.text_area.insert(tk.END, value)
+                    end_idx = self.text_area.index(tk.INSERT)
+                    self.text_area.tag_add("highlighted", start_idx, end_idx)
+                    i += len(match.group(0))
+                    continue
 
-            # Insert everything before the match
-            self.text_area.insert(tk.END, text[pos:start])
+            # Match [tag]text[/tag]
+            match = re.match(r"\[([a-zA-Z]+)\](.+?)\[/\1\]", text[i:], flags=re.DOTALL)
+            if match:
+                tag = match.group(1)
+                content = match.group(2)
+                if tag in self.text_area.tag_names():
+                    start_idx = self.text_area.index(tk.INSERT)
+                    self.text_area.insert(tk.END, content)
+                    end_idx = self.text_area.index(tk.INSERT)
+                    self.text_area.tag_add(tag, start_idx, end_idx)
+                    i += len(match.group(0))
+                    continue
 
-            # Insert substituted variable and highlight it
-            start_index = self.text_area.index(tk.INSERT)
-            self.text_area.insert(tk.END, value)
-            end_index = self.text_area.index(tk.INSERT)
-            self.text_area.tag_add("highlighted", start_index, end_index)
-
-            pos = end
-
-        # Insert the rest of the text after the last match
-        self.text_area.insert(tk.END, text[pos:])
-        self.text_area.insert(tk.END, "\n\n")
+            # Otherwise, insert one character
+            self.text_area.insert(tk.END, text[i])
+            i += 1
 
     def handle_key(self, event):
         key = event.keysym

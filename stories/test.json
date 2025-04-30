@@ -1,6 +1,6 @@
 {
     "start": {
-      "ascii_art": "forest.txt",
+      "ascii_art": "hedgehog.txt",
       "text": "$$name, $$class,you find yourself at the edge of an ancient forest.",
       "choices": {
         "Enter the forest": "deep_forest",
