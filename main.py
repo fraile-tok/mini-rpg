@@ -8,7 +8,7 @@ import re
 STORY_DIR = "stories"
 CHARACTER_DIR = "characters"
 ASCII_DIR = "ascii_art"
-FONT = "Fira Code"
+FONT = "Kelmscott Mono"
 
 class StartMenu:
     def __init__(self, root, on_start_game):
